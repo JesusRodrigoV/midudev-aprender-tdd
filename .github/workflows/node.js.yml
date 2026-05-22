@@ -2,17 +2,18 @@ name: JR CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   jr:
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 24.x
-          cache: 'npm'
+          cache: "npm"
       - run: npm ci --legacy-peer-deps --no-audit --no-fund
+      - run: npm run lint
       - run: npm run build
